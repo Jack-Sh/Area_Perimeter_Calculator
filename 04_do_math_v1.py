@@ -1,3 +1,6 @@
+import math
+
+
 # functions
 
 
@@ -77,6 +80,73 @@ def choice_checker(question, valid_list, error, ):
             print(error)
 
 
+# Does math for rectangle
+def rectangle_function():
+
+    # asks for base and height
+    base = int_check("Base: ")
+    height = int_check("Height: ")
+
+    # do the math for area and perimeter
+    area = base * height
+    perimeter = base*2 + height*2
+
+    # print the area and perimeter
+    print("Area - {} | Perimeter - {}".format(area, perimeter))
+    print()
+
+    # return the area and perimeter
+    return area, perimeter
+
+
+# does math for triangle
+def triangle_function():
+
+    # ask for dimensions
+    base = int_check("Base: ")
+    height = int_check("Height: ")
+    side_2 = int_check("Side 2: ")
+    side_3 = int_check("Side 3: ")
+
+    # do math
+    area = 0.5*base*height
+    perimeter = base+side_2+side_3
+
+    # print area and perimeter
+    print("Area - {} | Perimeter - {}".format(area, perimeter))
+    print()
+
+    # return the area and perimeter
+    return area, perimeter
+
+
+# does math for square
+def square_function():
+
+    # ask for dimensions
+    side_1 = int_check("Enter a side: ")
+
+    # do math
+    area = side_1*side_1
+    perimeter = side_1*4
+
+    # print area and perimeter
+    print("Area - {} | Perimeter - {}".format(area, perimeter))
+    print()
+
+    # return area and perimeter
+    return area, perimeter
+
+
+def circle_function():
+
+    # ask for dimensions
+    radius = int_check("Radius: ")
+
+    # do math
+    area =
+
+
 # main routine
 
 # setup list
@@ -89,23 +159,12 @@ for item in range(0,4):
     what_shape = choice_checker("Shape? ", valid_shapes, "Please enter a valid shape\n")
     print()
 
-    if what_shape == "rectangle" or what_shape == "square":
-
-        base = int_check("Enter Base Length: ", None)
-        height = int_check("Enter Height Length: ", None)
-        print("Base = {} | Height = {} ".format(base, height))
-        print()
+    # if the chosen shape is a rectangle run the correct function
+    if what_shape == "rectangle":
+        rectangle_function()
 
     elif what_shape == "triangle":
+        triangle_function()
 
-        base = int_check("Enter Base Length: ", None)
-        height = int_check("Enter Height Length: ", None)
-        side_2 = int_check("Enter Side 2 Length: ", None)
-        side_3 = int_check("Enter Side 3 Length: ", None)
-        print("Base = {} | Height = {} | Side 2 = {} | Side 3 = {}".format(base, height, side_2, side_3))
-        print()
-
-    else:
-        radius = int_check("Enter Radius: ", None)
-        print("Radius = {}".format(radius))
-        print()
+    elif what_shape == "square":
+        square_function()
