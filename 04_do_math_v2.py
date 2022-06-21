@@ -80,79 +80,56 @@ def choice_checker(question, valid_list, error, ):
             print(error)
 
 
-# Does math for rectangle
-def rectangle_function():
+# Ask user for shape and does math
+def do_math():
 
-    # asks for base and height
-    base = int_check("Base: ")
-    height = int_check("Height: ")
-
-    # do the math for area and perimeter
-    area = base * height
-    perimeter = base*2 + height*2
-
-    # print the area and perimeter
-    print("Area = {} | Perimeter = {}".format(area, perimeter))
+    what_shape = choice_checker("Shape? ", valid_shapes, "Please enter a valid shape\n")
     print()
 
-    # return the area and perimeter
-    return area, perimeter
+    # get dimensions
 
+    if what_shape == "square":
+        base = int_check("Enter a side: ")
+        height = base
 
-# does math for triangle
-def triangle_function():
+    elif what_shape == "rectangle":
+        base = int_check("Base: ")
+        height = int_check("Height: ")
 
-    # ask for dimensions
-    base = int_check("Base: ")
-    height = int_check("Height: ")
-    side_2 = int_check("Side 2: ")
-    side_3 = int_check("Side 3: ")
+    elif what_shape == "circle":
+        radius = int_check("Radius: ")
+
+    else:
+        base = int_check("Base: ")
+        height = int_check("Height: ")
+        side_2 = int_check("Side 2: ")
+        side_3 = int_check("Side 3: ")
 
     # do math
-    area = 0.5*base*height
-    perimeter = base+side_2+side_3
 
-    # print area and perimeter
+    # area
+    if what_shape == "square" or what_shape == "rectangle":
+        area = base * height
+
+    elif what_shape == "triangle":
+        area = 0.5 * base * height
+
+    else:
+        area = math.pi * radius * radius
+
+    # perimeter
+    if what_shape == "square" or what_shape == "rectangle":
+        perimeter = 2 * base + 2 * height
+
+    elif what_shape == "triangle":
+        perimeter = base + side_2 + side_3
+
+    else:
+        perimeter = 2 * math.pi * radius
+
+    # print output
     print("Area = {} | Perimeter = {}".format(area, perimeter))
     print()
-
-    # return the area and perimeter
-    return area, perimeter
-
-
-# does math for square
-def square_function():
-
-    # ask for dimensions
-    side_1 = int_check("Enter a side: ")
-
-    # do math
-    area = side_1*side_1
-    perimeter = side_1*4
-
-    # print area and perimeter
-    print("Area = {} | Perimeter = {}".format(area, perimeter))
-    print()
-
-    # return area and perimeter
-    return area, perimeter
-
-
-def circle_function():
-
-    # ask for dimensions
-    radius = int_check("Radius: ")
-
-    # do math
-    area = math.pi * radius*radius
-    perimeter = 2 * math.pi * radius
-
-    print("Area = {} | Perimeter = {}".format(area, perimeter))
-    print()
-
-    # return area and perimeter
-    return area, perimeter
-
 
 # main routine
 
@@ -161,20 +138,4 @@ valid_shapes = ["square", "rectangle", "circle", "triangle"]
 
 # begin loop
 for item in range(0,4):
-
-    # get shape and check that it's valid
-    what_shape = choice_checker("Shape? ", valid_shapes, "Please enter a valid shape\n")
-    print()
-
-    # if the chosen shape is a rectangle run the correct function
-    if what_shape == "rectangle":
-        rectangle_function()
-
-    elif what_shape == "triangle":
-        triangle_function()
-
-    elif what_shape == "square":
-        square_function()
-
-    else:
-        circle_function()
+    do_math()
