@@ -1,7 +1,6 @@
 import math
 
-
-# functions
+# Functions
 
 
 # Checks for an integer more than 0
@@ -74,6 +73,7 @@ def choice_checker(question, valid_list, error, ):
 
         for item in valid_list:
             if response == item[0] or response == item:
+                print(item)
                 return item
 
         else:
@@ -133,11 +133,35 @@ def do_math():
 
     return area, perimeter
 
-# main routine
+
+# Main Routine...
 
 # setup list
 valid_shapes = ["square", "rectangle", "circle", "triangle"]
 
-# begin loop
-for item in range(0,4):
+# Ask how many question the user needs to answer
+questions_needed = input("How many questions do you need to answer? ")
+
+# If user types [enter] set questions to 1000 (for now)
+if questions_needed == "":
+    questions_needed = 1000
+
+# If users enters a number check that it's valid
+else:
+    int_check(None, questions_needed)
+
+# Program Begins
+print("\n---- Program Launches ----")
+print()
+
+# Define number of questions and ensure that questions needed is a integer
+num_questions = int(questions_needed)
+
+# Start loop (while number of questions does not = 0)
+while num_questions != 0:
+
+    # ask user for shape and do the math
     do_math()
+
+    # Subtract 1 from the questions counter
+    num_questions -= 1
