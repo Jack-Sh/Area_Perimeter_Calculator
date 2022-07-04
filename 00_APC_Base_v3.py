@@ -72,6 +72,8 @@ def do_math(shape):
         # --- perimeter ---
         perimeter = 2 * side_1 + 2 * side_2
 
+        all_side_2.append(side_2)
+
     elif shape == "circle":
         side_1 = int_check("Radius: ", "Please enter a number more than 0", float)
 
@@ -93,9 +95,10 @@ def do_math(shape):
         # --- perimeter ---
         perimeter = side_1 + side_2 + side_3
 
+        all_side_2.append(side_2)
+        all_side_3.append(side_3)
+
     all_side_1.append(side_1)
-    all_side_2.append(side_2)
-    all_side_3.append(side_3)
     all_area.append(area)
     all_perim.append(perimeter)
 
@@ -160,3 +163,10 @@ while num_questions != questions_needed:
 
     # add one to question counter
     num_questions += 1
+
+# setup and print data frame
+
+summary_frame = pandas.DataFrame.from_dict(summary_data_dict, orient='index')
+
+summary_frame = summary_frame.transpose()
+print(summary_frame)
