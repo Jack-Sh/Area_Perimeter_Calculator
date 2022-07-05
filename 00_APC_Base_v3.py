@@ -63,6 +63,10 @@ def do_math(shape):
         # --- perimeter ---
         perimeter = 4 * side_1
 
+        # set other sides to / for the lists
+        side_2 = "/"
+        side_3 = "/"
+
     elif shape == "rectangle":
         side_1 = int_check("Base: ", "Please enter a number more than 0", float)
         side_2 = int_check("Height: ", "Please enter a number more than 0", float)
@@ -72,7 +76,8 @@ def do_math(shape):
         # --- perimeter ---
         perimeter = 2 * side_1 + 2 * side_2
 
-        all_side_2.append(side_2)
+        # set other sides to / for the lists
+        side_3 = "/"
 
     elif shape == "circle":
         side_1 = int_check("Radius: ", "Please enter a number more than 0", float)
@@ -81,6 +86,10 @@ def do_math(shape):
         area = math.pi * side_1 * side_1
         # --- perimeter ---
         perimeter = 2 * math.pi * side_1
+
+        # set other sides to / for the lists
+        side_2 = "/"
+        side_3 = "/"
 
     else:
         side_1 = int_check("Side 1: ", "Please enter a number more than 0", float)
@@ -95,10 +104,10 @@ def do_math(shape):
         # --- perimeter ---
         perimeter = side_1 + side_2 + side_3
 
-        all_side_2.append(side_2)
-        all_side_3.append(side_3)
-
+    # append all data into respective lists
     all_side_1.append(side_1)
+    all_side_2.append(side_2)
+    all_side_3.append(side_3)
     all_area.append(area)
     all_perim.append(perimeter)
 
@@ -164,9 +173,13 @@ while num_questions != questions_needed:
     # add one to question counter
     num_questions += 1
 
-# setup and print data frame
+# create data frame and order columns
+summary_frame = pandas.DataFrame(summary_data_dict, columns=['Shape', 'Length 1', 'Length 2',
+                                                             'Length 3', 'Area', 'Perimeter'])
 
-summary_frame = pandas.DataFrame.from_dict(summary_data_dict, orient='index')
+# ask user if they want to see the summary
+see_summary = choice_checker("Do you want to see the summary? ", yes_no_list, "Please enter yes or no")
 
-summary_frame = summary_frame.transpose()
-print(summary_frame)
+# if yes print the summary
+if see_summary == "yes":
+    print(summary_frame)
