@@ -96,13 +96,13 @@ def do_math(shape):
         side_2 = int_check("Side 2: ", "Please enter a number more than 0", float)
         side_3 = int_check("Side 3: ", "Please enter a number more than 0", float)
 
-        # --- area ---
-        semi_perim = (side_1 + side_2 + side_3)/2
-        area_unsquared = (semi_perim - side_1) * (semi_perim - side_2) * (semi_perim - side_3) * semi_perim
-        area = math.sqrt(area_unsquared)
-
         # --- perimeter ---
         perimeter = side_1 + side_2 + side_3
+
+        # --- area ---
+        semi_perim = perimeter/2
+        area_unsquared = (semi_perim - side_1) * (semi_perim - side_2) * (semi_perim - side_3) * semi_perim
+        area = math.sqrt(area_unsquared)
 
     # append all data into respective lists
     all_side_1.append(side_1)
@@ -116,6 +116,18 @@ def do_math(shape):
     print(quick_summary)
 
     return ""
+
+
+# holds instruction information
+def instructions():
+
+    print("- First you will be asked how many questions you need to answer (press [enter] for infinite questions and"
+          "type 'xxx' to break the loop when asked for a shape).\n"
+          "- You will then be asked to enter a shape (square, rectangle, triangle or circle).\n"
+          "- Based on the shape you will be asked for the appropriate dimensions (these dimensions can be decimals).\n"
+          "- The program will then print out the area and perimeter before beginning the loop again.\n"
+          "- Once you have answered your desired amount of questions the program will ask if you want to see a summary.\n"
+          "- This shows all your questions that you answered in one easy to read table.")
 
 
 # setup lists
@@ -140,6 +152,14 @@ summary_data_dict = {
     "Area": all_area,
     "Perimeter": all_perim
 }
+
+# ask user if they want instructions
+see_instructions = choice_checker("Do you want to see the instructions? ", yes_no_list, "Please enter yes or no")
+
+# if user enters "yes" print instructions
+if see_instructions == "yes":
+    print()
+    instructions()
 
 # Ask how many question the user needs to answer
 questions_needed = int_check("How many questions do you need to answer? ", "Please enter a num more than 0 or [enter]",
@@ -182,4 +202,5 @@ see_summary = choice_checker("Do you want to see the summary? ", yes_no_list, "P
 
 # if yes print the summary
 if see_summary == "yes":
+    print()
     print(summary_frame)
