@@ -154,16 +154,16 @@ summary_data_dict = {
 }
 
 # ask user if they want instructions
-see_instructions = choice_checker("Do you want to see the instructions? ", yes_no_list, "Please enter yes or no")
+see_instructions = choice_checker("Do you want to see the instructions? ", yes_no_list, "Please enter yes or no\n")
+print()
 
 # if user enters "yes" print instructions
 if see_instructions == "yes":
-    print()
     instructions()
 
 # Ask how many question the user needs to answer
-questions_needed = int_check("How many questions do you need to answer? ", "Please enter a num more than 0 or [enter]",
-                             int)
+questions_needed = int_check("How many questions do you need to answer? ",
+                             "Please enter a whole number more than 0 or [enter]\n", int)
 
 if questions_needed == "":
     questions_needed = 1000
@@ -179,7 +179,7 @@ while num_questions != questions_needed:
     # print the question number
     print("--- Question: {} ---".format(num_questions + 1))
 
-    what_shape = choice_checker("Shape? ", valid_shapes, "Please enter a valid shape\n")
+    what_shape = choice_checker("Shape? ", valid_shapes, "Please enter a valid shape (square, rectangle, circle, triangle)\n")
     print()
 
     all_shapes.append(what_shape)

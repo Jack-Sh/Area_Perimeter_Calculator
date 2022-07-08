@@ -123,7 +123,7 @@ yes_no_list = ["yes", "no"]
 num_questions = 0
 
 # Ask how many question the user needs to answer
-questions_needed = int_check("How many questions do you need to answer? ", "Please enter a num more than 0 or [enter]",
+questions_needed = int_check("How many questions do you need to answer? ", "Please enter a whole number more than 0 or [enter]",
                              int)
 
 if questions_needed == "":
