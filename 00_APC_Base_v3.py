@@ -107,21 +107,27 @@ def do_math(shape, rounded_answers):
         side_3 = "/"
 
     else:
+        # ask user what dimensions they have
         check_dimensions = choice_checker("Do you just have base and height? ", yes_no_list, "Please enter yes or no\n")
         print()
 
+        # set sides values for loop
         side_1 = 0
         side_2 = 0
         side_3 = 1
 
+        # if user has 3 side values...
         if check_dimensions == "no":
 
+            # set up loop (while the sum of 1 + 2 is lesser than or equal to 3
             while side_1 + side_2 <= side_3:
 
+                # get dimension values
                 side_1 = num_check("Side 1: ", float)
                 side_2 = num_check("Side 2: ", float)
                 side_3 = num_check("Side 3: ", float)
 
+                # print error if it is an impossible triangle
                 if side_1 + side_2 <= side_3:
                     print("This is an impossible triangle. The sum of side 1 + side 2 must be greater than side 3\n")
                     continue
@@ -134,6 +140,7 @@ def do_math(shape, rounded_answers):
             area_unsquared = (semi_perim - side_1) * (semi_perim - side_2) * (semi_perim - side_3) * semi_perim
             area = math.sqrt(area_unsquared)
 
+        # if user has base and height get values
         else:
             side_1 = num_check("Base: ", float)
             side_2 = num_check("Height: ", float)
@@ -142,8 +149,10 @@ def do_math(shape, rounded_answers):
             # --- area ---
             area = 0.5 * side_1 * side_2
 
+            # set perimeter to blank
             perimeter = "/"
 
+    # round answers if user wants rounding
     if rounded_answers == "yes":
         area = rounding(area)
         perimeter = rounding(perimeter)
@@ -165,13 +174,15 @@ def do_math(shape, rounded_answers):
 # holds instruction information
 def instructions():
 
-    print("- First you will be asked how many questions you need to answer (press [enter] for infinite questions and"
+    print("- Then, you will be asked if you want rounded answers (these will be rounded to 2 dp)\n"
+          "- First you will be asked how many questions you need to answer (press [enter] for infinite questions and"
           "type 'xxx' to break the loop when asked for a shape).\n"
           "- You will then be asked to enter a shape (square, rectangle, triangle or circle).\n"
           "- Based on the shape you will be asked for the appropriate dimensions (these dimensions can be decimals).\n"
           "- The program will then print out the area and perimeter before beginning the loop again.\n"
           "- Once you have answered your desired amount of questions the program will ask if you want to see a summary.\n"
-          "- This shows all your questions that you answered in one easy to read table.")
+          "- This shows all your questions that you answered in one easy to read table.\n")
+    print()
 
 
 # setup lists
@@ -205,7 +216,8 @@ print()
 if see_instructions == "yes":
     instructions()
 
-do_rounding = choice_checker("Do you want rounded answers? ", yes_no_list, "Please enter yes or no\n")
+# ask user if they want rounded answers
+do_rounding = choice_checker("Do you want rounded answers? (2dp) ", yes_no_list, "Please enter yes or no\n")
 print()
 
 # Ask how many question the user needs to answer
@@ -214,15 +226,11 @@ questions_needed = num_check("How many questions do you need to answer? ", int)
 if questions_needed == "":
     questions_needed = 1000
 
-# Program Begins
-print("\n---- Program Launches ----")
-print()
-
-
 # Start loop (while the number of questions doesn't equal the max questions)
 while num_questions != questions_needed:
 
     # print the question number
+    print()
     print("--- Question: {} ---".format(num_questions + 1))
 
     # ask user for shape
