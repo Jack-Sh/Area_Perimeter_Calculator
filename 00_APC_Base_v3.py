@@ -1,6 +1,7 @@
 import math
 import pandas
 
+
 # Functions
 
 
@@ -10,7 +11,7 @@ def rounding(x):
 
 
 # checks if a number is valid
-def num_check(question, num_type):
+def num_check(question, num_type, allow_enter):
     error = "Please enter a number more than 0"
 
     # start loop
@@ -37,6 +38,12 @@ def num_check(question, num_type):
 
             # print error for unexpected values and restart the loop
             except ValueError:
+                print(error)
+                continue
+
+        # if user types [enter] and allow_enter is set to no, print an error and start the loop again
+        else:
+            if allow_enter == "no":
                 print(error)
                 continue
 
@@ -71,7 +78,7 @@ def do_math(shape, rounded_answers):
     # get dimensions and do math
 
     if shape == "square":
-        side_1 = num_check("Enter a side: ", float)
+        side_1 = num_check("Enter a side: ", float, "no")
 
         # --- area ---
         area = side_1 * side_1
@@ -83,8 +90,8 @@ def do_math(shape, rounded_answers):
         side_3 = "/"
 
     elif shape == "rectangle":
-        side_1 = num_check("Base: ", float)
-        side_2 = num_check("Height: ", float)
+        side_1 = num_check("Base: ", float, "no")
+        side_2 = num_check("Height: ", float, "no")
 
         # --- area ---
         area = side_1 * side_2
@@ -95,7 +102,7 @@ def do_math(shape, rounded_answers):
         side_3 = "/"
 
     elif shape == "circle":
-        side_1 = num_check("Radius: ", float)
+        side_1 = num_check("Radius: ", float, "no")
 
         # --- area ---
         area = math.pi * side_1 * side_1
@@ -123,9 +130,9 @@ def do_math(shape, rounded_answers):
             while side_1 + side_2 <= side_3:
 
                 # get dimension values
-                side_1 = num_check("Side 1: ", float)
-                side_2 = num_check("Side 2: ", float)
-                side_3 = num_check("Side 3: ", float)
+                side_1 = num_check("Side 1: ", float, "no")
+                side_2 = num_check("Side 2: ", float, "no")
+                side_3 = num_check("Side 3: ", float, "no")
 
                 # print error if it is an impossible triangle
                 if side_1 + side_2 <= side_3:
@@ -142,8 +149,8 @@ def do_math(shape, rounded_answers):
 
         # if user has base and height get values
         else:
-            side_1 = num_check("Base: ", float)
-            side_2 = num_check("Height: ", float)
+            side_1 = num_check("Base: ", float, "no")
+            side_2 = num_check("Height: ", float, "no")
             side_3 = "/"
 
             # --- area ---
@@ -155,7 +162,9 @@ def do_math(shape, rounded_answers):
     # round answers if user wants rounding
     if rounded_answers == "yes":
         area = rounding(area)
-        perimeter = rounding(perimeter)
+
+        if perimeter != "/":
+            perimeter = rounding(perimeter)
 
     # append all data into respective lists
     all_side_1.append(side_1)
@@ -221,7 +230,7 @@ do_rounding = choice_checker("Do you want rounded answers? (2dp) ", yes_no_list,
 print()
 
 # Ask how many question the user needs to answer
-questions_needed = num_check("How many questions do you need to answer? ", int)
+questions_needed = num_check("How many questions do you need to answer? ", int, "yes")
 
 if questions_needed == "":
     questions_needed = 1000
